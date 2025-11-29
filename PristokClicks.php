@@ -5,9 +5,9 @@
 -->
 
 <?php
-    $Store_Name = "Pristok Clicks"; #Variable
+    $Store_Name = "Pristok Clicks"; #Variable (Assign1)
 
-    $Products = [ #Array
+    $Products = [ #Array (Assign1)
         [
             "Type" => "Membrane", 
             "Description" => "Most Affordable, For Basic Use", 
@@ -23,25 +23,31 @@
         [
             "Type" => "Magnetic", 
             "Description" => "Costly, For High Level Gaming", 
-            "In stock" => "7", #Type Juggling
+            "In stock" => "7", #Type Juggling (Assign1)
             "Brands" => ["Wooting", "MChose", "Keychron"]
-        ],
+        ], 
+        [
+            "Type" => "Split", 
+            "Description" => "Focused on Comfort and Ergonomics", 
+            "In stock" => 0, 
+            "Brands" => ["Coming Soon..."]
+        ]
     ];
 
-    $Total_Products = #Operator
-        $Products[0]["In stock"] +
-        $Products[1]["In stock"] +
-        $Products[2]["In stock"]; #Type Juggling
+    $Total_Products = $Products[0]["In stock"] +  $Products[1]["In stock"] + $Products[2]["In stock"]; #Operators (Assign1)
 ?>
 
 <!DOCTYPE html>
-<html>
-    <head>
-        <title><?php echo $Store_Name; ?></title>
-    </head>
-
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    <title><?php echo $Store_Name; ?></title> <!-- Normal Echo Method -->
     <style>
         body{
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
             background-image: url('https://res.cloudinary.com/kineticlabs/image/upload/q_auto/c_fit,w_1000/f_auto/v1/api-images/blog/05-10-23-how-does-a-mechanical-keyboard-pcb-work/layouts_gbny9e_tpghl5');
             background-repeat: no-repeat;
             background-size: cover;
@@ -56,7 +62,6 @@
             background-color: rgba(0,0,0,0.6);
             width: 100%; 
             padding: 20px 0;
-            margin: 0; 
             text-align: center;
         }
 
@@ -64,11 +69,17 @@
             margin: 5px 0;
         }
 
+        .main-content {
+            flex: 1;
+        }
+
         .product-table {
             width: 80%;
             margin: 30px auto;
             border-collapse: collapse;
             background-color: rgba(0,0,0,0.5);
+            border-radius: 15px;
+            overflow: hidden;
         }
 
         .product-table th, .product-table td {
@@ -97,76 +108,87 @@
             color: #ff8800; 
             cursor: pointer; 
         }
+
+        .footer {
+            background-color: #ff8800; 
+            color: black;
+            text-align: center;
+            padding: 15px 0;
+            font-weight: bold;
+        }
+
+        h3 {
+            text-align: center;
+            margin-top: 30px;
+        }
     </style>
+</head>
 
-    <body>
-        <div class="header-bar">
-            <h1 style="background: linear-gradient(90deg, #ff8800, #ffdd55); -webkit-background-clip: text; color: transparent;">
-                <?=$Store_Name; ?> <!-- Shorthand for echo -->
-            </h1>
-            <h4 style="background: linear-gradient(90deg, #ff8800, #ffdd55); -webkit-background-clip: text; color: transparent;">
-                Your All-in-One Keyboard Hub
-            </h4>
-        </div>
+<body>
+    <div class="header-bar">
+        <h1 style="background: linear-gradient(90deg, #ff8800, #ffdd55); -webkit-background-clip: text; color: transparent;"><?=$Store_Name; ?></h1> <!-- Shorthand Echo Method (Assign1) -->
+        <h4 style="background: linear-gradient(90deg, #ff8800, #ffdd55); -webkit-background-clip: text; color: transparent;">Your All-in-One Keyboard Hub</h4>
+    </div>
 
-        <div>
-
+    <div class="main-content">
+        <!-- Available Products -->
+        <h3>Available Products</h3>
         <div style="width: 80%; margin: 20px auto; text-align: center; font-size: 18px;">
             Total Products Available: <?php echo $Total_Products; ?>
         </div>
-
         <table class="product-table">
             <tr style="color: black;">
-                <!-- Table Heading -->
                 <th>Type</th>
                 <th>Description</th>
                 <th>Brands</th>
                 <th>In Stock</th>
             </tr>
-
-            <!-- Row 1 -->
-            <tr>
-                <td><?php echo $Products[0]['Type']; ?></td>
-                <td><?php echo $Products[0]['Description']; ?></td>
-                <td>
-                    <ul>
-                        <li><?php echo $Products[0]['Brands'][0]; ?></li>
-                        <li><?php echo $Products[0]['Brands'][1]; ?></li>
-                        <li><?php echo $Products[0]['Brands'][2]; ?></li>
-                    </ul>
-                </td>
-                <td><?php echo $Products[0]['In stock']; ?></td>
-            </tr>
-
-            <!-- Row 2 -->
-            <tr>
-                <td><?php echo $Products[1]['Type']; ?></td>
-                <td><?php echo $Products[1]['Description']; ?></td>
-                <td>
-                    <ul>
-                        <li><?php echo $Products[1]['Brands'][0]; ?></li>
-                        <li><?php echo $Products[1]['Brands'][1]; ?></li>
-                        <li><?php echo $Products[1]['Brands'][2]; ?></li>
-                    </ul>
-                </td>
-                <td><?php echo $Products[1]['In stock']; ?></td>
-            </tr>
-
-            <!-- Row 3 -->
-            <tr>
-                <td><?php echo $Products[2]['Type']; ?></td>
-                <td><?php echo $Products[2]['Description']; ?></td>
-                <td>
-                    <ul>
-                        <li><?php echo $Products[2]['Brands'][0]; ?></li>
-                        <li><?php echo $Products[2]['Brands'][1]; ?></li>
-                        <li><?php echo $Products[2]['Brands'][2]; ?></li>
-                    </ul>
-                </td>
-                <td><?php echo $Products[2]['In stock']; ?></td>
-            </tr>
-
+            <?php
+                foreach($Products as $product) { #FOREACH Loop (Assign2)
+                    if($product['In stock'] > 0) { #IF Conditional Statement (Assign2)
+                        echo "<tr>";
+                        echo "<td>" . $product['Type'] . "</td>";
+                        echo "<td>" . $product['Description'] . "</td>";
+                        echo "<td><ul>";
+                        foreach($product['Brands'] as $brand) {
+                            echo "<li>" . $brand . "</li>";
+                        }
+                        echo "</ul></td>";
+                        echo "<td>" . $product['In stock'] . "</td>";
+                        echo "</tr>";
+                    }
+                }
+            ?>
         </table>
-        </div>
-    </body>
+
+        <!-- Out of Stock -->
+        <h3>Out of Stock Items</h3>
+        <table class="product-table">
+            <tr style="color: black;">
+                <th>Type</th>
+                <th>Description</th>
+                <th>Brands</th>
+                <th>In Stock</th>
+            </tr>
+            <?php
+                foreach($Products as $product) { #FOREACH Loop (Assign2)
+                    if($product['In stock'] == 0) { #IF Conditional Statement (Assign2)
+                        echo "<tr>";
+                        echo "<td>" . $product['Type'] . "</td>";
+                        echo "<td>" . $product['Description'] . "</td>";
+                        echo "<td><ul>";
+                        foreach($product['Brands'] as $brand) {
+                            echo "<li>" . $brand . "</li>";
+                        }
+                        echo "</ul></td>";
+                        echo "<td>" . $product['In stock'] . "</td>";
+                        echo "</tr>";
+                    }
+                }
+            ?>
+        </table>
+    </div>
+
+    <?php include "footer.php"; ?> <!-- include (Assign2) -->
+</body>
 </html>
