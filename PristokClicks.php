@@ -1,7 +1,7 @@
 <!-- 
  INCOGNITO, Rich Cristoff C.
  WD - 201
- November 29, 2025
+ December 3, 2025
 -->
 
 <?php
@@ -31,10 +31,31 @@
             "Description" => "Focused on Comfort and Ergonomics", 
             "In stock" => 0, 
             "Brands" => ["Coming Soon..."]
+        ],
+        [ //Add 3-5 more products in your table (Assign3)
+            "Type" => "Wireless", 
+            "Description" => "For the Cleanest Workstation Look", 
+            "In stock" => 5, 
+            "Brands" => ["Logitech", "ASUS", "Apple"]
+        ],
+        [
+            "Type" => "Keypad", 
+            "Description" => "Additional Keys", 
+            "In stock" => 0, 
+            "Brands" => ["Zeus", "Rapoo", "Keychron"]
+        ],
+        [
+            "Type" => "Custom Build", 
+            "Description" => "A Personalized Keyboard Just for You", 
+            "In stock" => 0, 
+            "Brands" => ["EPOMAKER", "ZUOYA", "KBDFans"] 
         ]
     ];
 
-    $Total_Products = $Products[0]["In stock"] +  $Products[1]["In stock"] + $Products[2]["In stock"]; #Operators (Assign1)
+    $Total_Products = 0;
+    foreach ($Products as $product){
+        $Total_Products += $product["In stock"]; #Operators (Assign1)
+    } 
 ?>
 
 <!DOCTYPE html>
@@ -48,7 +69,7 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            background-image: url('https://res.cloudinary.com/kineticlabs/image/upload/q_auto/c_fit,w_1000/f_auto/v1/api-images/blog/05-10-23-how-does-a-mechanical-keyboard-pcb-work/layouts_gbny9e_tpghl5');
+            background-image: url('https://wallpapers.com/images/hd/cute-keyboard-background-i6t1wjla9tr6qal0.jpg');
             background-repeat: no-repeat;
             background-size: cover;
             background-blend-mode: darken;
@@ -121,6 +142,22 @@
             text-align: center;
             margin-top: 30px;
         }
+        .redirect-btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #ff8800;
+            color: black;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .redirect-btn:hover {
+            background-color: #ffdd55;
+            transform: scale(1.05);
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -187,6 +224,10 @@
                 }
             ?>
         </table>
+    </div>
+
+    <div style="text-align: center; margin: 30px 0;">
+        <a href="PristokClicks_Stock.php" class="redirect-btn">Go to Stock Monitor</a>
     </div>
 
     <?php include "footer.php"; ?> <!-- include (Assign2) -->
